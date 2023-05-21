@@ -1,16 +1,13 @@
-import os
-
 import allure
 from selene.support.shared import browser
 from selene import have, command
-
 from utils import attach
 
 
 @allure.title('Successful fill form')
 def test_practice_form(browser_management):
     with allure.step('Open registrations form'):
-        browser.open('/automation-practice-form')
+        browser.open('https://demoqa.com/automation-practice-form')
 
     # WHEN
     with allure.step('fill registration form'):
@@ -36,7 +33,7 @@ def test_practice_form(browser_management):
         browser.all('[for^=hobbies-checkbox]').element_by(have.exact_text('Sports')).click()
         browser.all('[for^=hobbies-checkbox]').element_by(have.exact_text('Music')).click()
 
-        #browser.element('#uploadPicture').send_keys(os.getcwd() + "/test_5_5.jpg")
+        # browser.element('#uploadPicture').send_keys(os.getcwd() + "/test_5_5.jpg")
         # browser.element('#uploadPicture').send_keys(os.path.abspath(
         #   os.path.join(os.path.dirname(__file__), os.path.pardir, 'resourсes/test_5_5.jpg')))
 
@@ -51,7 +48,7 @@ def test_practice_form(browser_management):
 
     # THEN
     with allure.step('Check form results'):
-        #browser.element("#example-modal-sizes-title-lg").should(have.text("Thanks for submitting the form"))
+        # browser.element("#example-modal-sizes-title-lg").should(have.text("Thanks for submitting the form"))
         browser.element('.table').all('td').even.should(have.texts
                                                         ('Aleksandr Nikiforov',
                                                          'nikiforov@mail.ru',
@@ -64,8 +61,6 @@ def test_practice_form(browser_management):
                                                          'Moscow, Vernadsky avenue,19',
                                                          'NCR Delhi'))
 
-    #browser.element('#closeLargeModal').press_enter()
+    # browser.element('#closeLargeModal').press_enter()
 
-    attach.add_html(browser)
-    attach.add_screenshot(browser)
-    attach.add_logs(browser)
+
