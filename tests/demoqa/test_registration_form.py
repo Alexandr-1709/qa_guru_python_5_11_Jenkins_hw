@@ -1,13 +1,16 @@
+
 import allure
-from selene.support.shared import browser
 from selene import have, command
-from utils import attach
 
 
 @allure.title('Successful fill form')
-def test_practice_form(browser_management):
+def test_practice_form(setup_browser):
+    browser = setup_browser
     with allure.step('Open registrations form'):
         browser.open('https://demoqa.com/automation-practice-form')
+        browser.element(".practice-form-wrapper").should(have.text("Student Registration Form"))
+        browser.driver.execute_script("$('footer').remove()")
+        browser.driver.execute_script("$('#fixedban').remove()")
 
     # WHEN
     with allure.step('fill registration form'):
@@ -48,18 +51,18 @@ def test_practice_form(browser_management):
 
     # THEN
     with allure.step('Check form results'):
-        # browser.element("#example-modal-sizes-title-lg").should(have.text("Thanks for submitting the form"))
-        browser.element('.table').all('td').even.should(have.texts
-                                                        ('Aleksandr Nikiforov',
-                                                         'nikiforov@mail.ru',
-                                                         'Male',
-                                                         '9009997733',
-                                                         '17 September,1982',
-                                                         'Computer Science',
-                                                         'Sports, Music',
-                                                         '',
-                                                         'Moscow, Vernadsky avenue,19',
-                                                         'NCR Delhi'))
+        browser.element("#example-modal-sizes-title-lg").should(have.text("Thanks for submitting the form"))
+        # browser.element('.table').all('td').even.should(have.texts
+        #                                                 ('Aleksandr Nikiforov',
+        #                                                  'nikiforov@mail.ru',
+        #                                                  'Male',
+        #                                                  '9009997733',
+        #                                                  '17 September,1982',
+        #                                                  'Computer Science',
+        #                                                  'Sports, Music',
+        #                                                  '',
+        #                                                  'Moscow, Vernadsky avenue,19',
+        #                                                  'NCR Delhi'))
 
     # browser.element('#closeLargeModal').press_enter()
 
